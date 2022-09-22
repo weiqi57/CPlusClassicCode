@@ -30,10 +30,12 @@ threadpool<T>::threadpool(int thread_number, int request_number) {
     threadArray = new pthread_t[thread_number];
 
     for (int i = 0; i < thread_number; i++) {
-        pthread_create(threadArray + i, NULL, worker, this);
+        pthread_create(&threadArray[i], NULL, worker, this);
 
-        pthread_detach(threadArray + i);
+        // pthread_detach(threadArray + i);  //error! 应该传变量，而不是指针
+        pthread_detach(threadArray[i]);
     }
+
 }
 
 template <typename T>

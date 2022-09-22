@@ -35,10 +35,14 @@ public:
         strcpy(data_, other_mystr.data_);
     }
 
-    // 重载复制运算符
+    // 重载赋值运算符
     MyString &operator=(const MyString &other_mystr) {
         if (this == &other_mystr) {
             return *this;
+        }
+        if(data_ != nullptr) {
+            delete[] data_;
+            data_ = nullptr;
         }
 
         len_ = other_mystr.len_;
@@ -73,6 +77,7 @@ public:
     ~MyString() {
         if (data_ != nullptr) {
             delete[] data_;
+            data_ = nullptr;
         }
     }
 
